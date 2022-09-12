@@ -2,11 +2,14 @@ import gym
 from agent import Agent
 
 NUM_EPISODES = 2000
+SUCCEED_EPISODES = 100
 MAX_STEPS = 200
+SUCCEED_STEPS = 180
+
 
 class Environment:
     def __init__(self, env):
-        self.env = gym.make(env)
+        self.env = gym.make(env, MAX_STEPS)
         num_states = self.env.observation_space.shape[0]
         num_actions = self.env.action_space.n
         # observation_below = self.env.observation_space.low
@@ -25,7 +28,7 @@ class Environment:
                 action = self.agent.choose_action(observation, episode)
                 observation_next, _, done, _ = self.env.step(action)
                 if done:
-                    if step < 180:
+                    if step < SUCCEED_STEPS:
                         reward = -1
                         complete_episodes = 0
                     else:
@@ -41,7 +44,7 @@ class Environment:
                     break
             if is_episode_final:
                 break
-            if complete_episodes >= 100:
+            if complete_episodes >= SUCCEED_EPISODES:
                 print('Training is over')
                 is_episode_final = True
 
