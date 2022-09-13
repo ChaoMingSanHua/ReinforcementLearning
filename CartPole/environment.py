@@ -2,7 +2,7 @@ import gym
 from agent import Agent
 
 NUM_EPISODES = 2000
-SUCCEED_EPISODES = 100
+SUCCEED_EPISODES = 20
 MAX_STEPS = 200
 SUCCEED_STEPS = 180
 
